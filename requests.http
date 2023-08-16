@@ -1,0 +1,13 @@
+GET http://localhost:8080/health
+###
+POST http://localhost:8080/customers
+Content-Type: application/json
+
+{"firstName": "firstname",
+"lastName": "lastname",
+"email": "email",
+"address": "address",
+"phone": "phone"}
+###
+
+GET http://localhost:8080/customers
