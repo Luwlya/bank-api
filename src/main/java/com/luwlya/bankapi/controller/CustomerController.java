@@ -4,10 +4,7 @@ import com.luwlya.bankapi.dto.CreateCustomerRequest;
 import com.luwlya.bankapi.dto.CustomerDto;
 import com.luwlya.bankapi.dto.CustomersListDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -33,5 +30,16 @@ public class CustomerController {
         return ResponseEntity.ok().body(new CustomersListDto(List.of()));
     }
 
-    
+    @PatchMapping ("/customers/{id}")
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable String id, @RequestBody CreateCustomerRequest update) {
+        CustomerDto dto = new CustomerDto(id,
+                update.firstName(),
+                update.lastName(),
+                update.email(),
+                update.address(),
+                update.phone(),
+                OffsetDateTime.now(),
+                OffsetDateTime.now());
+        return ResponseEntity.ok().body(dto);
+    }
 }
