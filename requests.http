@@ -21,4 +21,10 @@ Content-Type: application/json
   "email": "email",
   "address": "address",
   "phone": "phone"}
+###
+
+GET http://localhost:8080/customers/123
+
+###
+DELETE http://localhost:8080/customers/123
 
