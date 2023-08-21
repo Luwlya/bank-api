@@ -33,4 +33,16 @@ Content-Type: application/json
 
 {"balance": "100",
   "currency": "EURO"}
+###
+GET http://localhost:8080/customer-accounts
+###
 
+GET http://localhost:8080/customer-accounts/123
+###
+PATCH http://localhost:8080/customer-accounts/123
+Content-Type: application/json
+
+{"balance": "200",
+  "currency": "UAH"}
+###
+DELETE http://localhost:8080/customer-accounts/123
