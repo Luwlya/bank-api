@@ -28,38 +28,24 @@ public class CustomerController {
 
     @GetMapping("/customers")
     public ResponseEntity<CustomersListDto> getAllCustomers() {
-        return ResponseEntity.ok().body(new CustomersListDto(List.of()));
+        return ResponseEntity.ok().body(customerService.getAllCustomers());
     }
 
     @GetMapping("/customers/{id}")
     public ResponseEntity<CustomerDto> getCustomer(@PathVariable String id){
-        CustomerDto dto = new CustomerDto(id,
-                "Ostap",
-                "Vyshnya",
-                "ovyshnya@ukr.com",
-                "Kyiv",
-                "+380670000001",
-                OffsetDateTime.now(),
-                OffsetDateTime.now());
+        CustomerDto dto = customerService.getCustomer(id);
         return ResponseEntity.ok().body(dto);
     }
 
     @PatchMapping ("/customers/{id}")
     public ResponseEntity<CustomerDto> updateCustomer(@PathVariable String id, @RequestBody CreateCustomerRequest update) {
-        CustomerDto dto = new CustomerDto(id,
-                update.firstName(),
-                update.lastName(),
-                update.email(),
-                update.address(),
-                update.phone(),
-                OffsetDateTime.now(),
-                OffsetDateTime.now());
+        CustomerDto dto = customerService.updateCustomer(id, update);
         return ResponseEntity.ok().body(dto);
     }
 
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable String id){
-        System.out.println("Customer " + id + " has been deleted");
+        customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
     }
 }
