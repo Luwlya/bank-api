@@ -3,6 +3,8 @@ package com.luwlya.bankapi.controller;
 import com.luwlya.bankapi.dto.CreateCustomerRequest;
 import com.luwlya.bankapi.dto.CustomerDto;
 import com.luwlya.bankapi.dto.CustomersListDto;
+import com.luwlya.bankapi.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,18 +13,16 @@ import java.util.List;
 
 @RestController
 public class CustomerController {
+    private CustomerService customerService;
+    @Autowired
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
     @PostMapping("/customers")
     public ResponseEntity<CustomerDto> createCustomer(@RequestBody CreateCustomerRequest request) {
-        CustomerDto dto = new CustomerDto("id1",
-                request.firstName(),
-                request.lastName(),
-                request.email(),
-                request.address(),
-                request.phone(),
-                OffsetDateTime.now(),
-                OffsetDateTime.now());
-        System.out.println(request);
-        return ResponseEntity.ok().body(dto);
+        CustomerDto customer = customerService.createCustomer(request);
+        return ResponseEntity.ok().body(customer);
     }
 
     @GetMapping("/customers")

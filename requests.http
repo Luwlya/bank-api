@@ -27,4 +27,10 @@ GET http://localhost:8080/customers/123
 
 ###
 DELETE http://localhost:8080/customers/123
+###
+POST http://localhost:8080/customer-accounts
+Content-Type: application/json
+
+{"balance": "100",
+  "currency": "EURO"}
 
