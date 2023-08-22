@@ -3,3 +3,5 @@ spring:
     url: jdbc:postgresql://localhost:5432/mydatabase
     user: myuser
     password: secret
+    clean-on-validation-error: false
+    clean-disabled: true
