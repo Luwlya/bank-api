@@ -1,16 +1,21 @@
 GET http://localhost:8080/health
+
 ###
 POST http://localhost:8080/customers
 Content-Type: application/json
 
-{"firstName": "firstname",
-"lastName": "lastname",
-"email": "email",
-"address": "address",
-"phone": "phone"}
+{
+  "firstName": "firstname",
+  "lastName": "lastname",
+  "email": "email",
+  "address": "address",
+  "phone": "phone"
+}
+
 ###
 
 GET http://localhost:8080/customers
+
 ###
 
 PATCH http://localhost:8080/customers/123
@@ -20,29 +25,40 @@ Content-Type: application/json
   "lastName": "lastname",
   "email": "email",
   "address": "address",
-  "phone": "phone"}
+  "phone": "phone"
+}
+
 ###
 
 GET http://localhost:8080/customers/123
 
 ###
 DELETE http://localhost:8080/customers/123
+
 ###
 POST http://localhost:8080/customer-accounts
 Content-Type: application/json
 
-{"balance": "100",
-  "currency": "EURO"}
+{
+  "balance": "100",
+  "currency": "EURO"
+}
+
 ###
 GET http://localhost:8080/customer-accounts
+
 ###
 
 GET http://localhost:8080/customer-accounts/123
+
 ###
 PATCH http://localhost:8080/customer-accounts/123
 Content-Type: application/json
 
-{"balance": "200",
-  "currency": "UAH"}
+{
+  "balance": "200",
+  "currency": "UAH"
+}
+
 ###
 DELETE http://localhost:8080/customer-accounts/123
