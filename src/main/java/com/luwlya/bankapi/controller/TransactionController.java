@@ -2,12 +2,10 @@ package com.luwlya.bankapi.controller;
 
 import com.luwlya.bankapi.dto.CreateTransactionRequest;
 import com.luwlya.bankapi.dto.TransactionDto;
-import com.luwlya.bankapi.dto.TransactionListDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 
 @RestController
 public class TransactionController {
@@ -37,6 +35,6 @@ public class TransactionController {
 //    public ResponseEntity<TransactionListDto> getAllTransactions(){
 //            TransactionListDto listDto = new TransactionListDto(List.of());
 //            return ResponseEntity.ok().body(listDto);
-        }
+//        }
     }
 }
