@@ -2,16 +2,18 @@ package com.luwlya.bankapi.controller;
 
 import com.luwlya.bankapi.dto.CreateTransactionRequest;
 import com.luwlya.bankapi.dto.TransactionDto;
+import com.luwlya.bankapi.dto.TransactionListDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @RestController
 public class TransactionController {
 
     @PostMapping("/transactions")
-    public ResponseEntity<TransactionDto> createTransaction(@RequestBody CreateTransactionRequest request){
+    public ResponseEntity<TransactionDto> createTransaction(@RequestBody CreateTransactionRequest request) {
         TransactionDto dto = new TransactionDto("id01",
                 "debit1",
                 "credit1",
@@ -22,7 +24,7 @@ public class TransactionController {
     }
 
     @GetMapping("/transactions/{id}")
-    public ResponseEntity<TransactionDto> getTransaction(@PathVariable String id){
+    public ResponseEntity<TransactionDto> getTransaction(@PathVariable String id) {
         TransactionDto dto = new TransactionDto(id,
                 "debit23",
                 "credit12",
@@ -30,11 +32,11 @@ public class TransactionController {
                 "money",
                 OffsetDateTime.now());
         return ResponseEntity.ok().body(dto);
+    }
 
-//    @GetMapping("/transactions")
-//    public ResponseEntity<TransactionListDto> getAllTransactions(){
-//            TransactionListDto listDto = new TransactionListDto(List.of());
-//            return ResponseEntity.ok().body(listDto);
-//        }
+    @GetMapping("/transactions")
+    public ResponseEntity<TransactionListDto> getAllTransactions() {
+        TransactionListDto listDto = new TransactionListDto(List.of());
+        return ResponseEntity.ok().body(listDto);
     }
 }

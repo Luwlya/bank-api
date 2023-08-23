@@ -72,3 +72,9 @@ Content-Type: application/json
   "amount": "100",
   "description": "money"
 }
+
+###
+GET http://localhost:8080/transactions
+
+###
+GET http://localhost:8080/transactions/123
