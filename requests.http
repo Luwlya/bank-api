@@ -62,3 +62,13 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8080/customer-accounts/123
+###
+POST http://localhost:8080/transactions
+Content-Type: application/json
+
+{
+  "debitId": "debit1",
+  "creditId": "credit1",
+  "amount": "100",
+  "description": "money"
+}
