@@ -4,10 +4,12 @@ import com.luwlya.bankapi.dto.CreateCustomerRequest;
 import com.luwlya.bankapi.dto.CustomerDto;
 import com.luwlya.bankapi.dto.CustomersListDto;
 
+import java.util.UUID;
+
 public interface CustomerService {
     CustomerDto createCustomer(CreateCustomerRequest request);
 
-    CustomerDto getCustomer(String id);
+    CustomerDto getCustomer(UUID id);
 
     CustomersListDto getAllCustomers();
 

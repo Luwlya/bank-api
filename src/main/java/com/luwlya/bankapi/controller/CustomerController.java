@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 public class CustomerController {
     private CustomerService customerService;
@@ -29,7 +31,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/{id}")
-    public ResponseEntity<CustomerDto> getCustomer(@PathVariable String id){
+    public ResponseEntity<CustomerDto> getCustomer(@PathVariable UUID id){
         CustomerDto dto = customerService.getCustomer(id);
         return ResponseEntity.ok().body(dto);
     }

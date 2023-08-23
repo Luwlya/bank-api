@@ -48,15 +48,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto getCustomer(String id) {
-        return new CustomerDto(id,
-                "Ostap",
-                "Vyshnya",
-                "ovyshnya@ukr.com",
-                "Kyiv",
-                "+380670000001",
-                OffsetDateTime.now(),
-                OffsetDateTime.now());
+    public CustomerDto getCustomer(UUID id) {
+        Customer customer = customerRepository.get(id);
+        return dto(customer);
     }
 
     @Override

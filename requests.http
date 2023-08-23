@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/customers/123
+GET http://localhost:8080/customers/f698e43d-51fd-4d27-bab5-ca558f8a2934
 
 ###
 DELETE http://localhost:8080/customers/123
