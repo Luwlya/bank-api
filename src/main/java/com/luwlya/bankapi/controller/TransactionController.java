@@ -3,18 +3,28 @@ package com.luwlya.bankapi.controller;
 import com.luwlya.bankapi.dto.CreateTransactionRequest;
 import com.luwlya.bankapi.dto.TransactionDto;
 import com.luwlya.bankapi.dto.TransactionListDto;
+import com.luwlya.bankapi.service.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class TransactionController {
 
+    private TransactionService transactionService;
+
+    @Autowired
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
+
     @PostMapping("/transactions")
-    public ResponseEntity<TransactionDto> createTransaction(@RequestBody CreateTransactionRequest request) {
-        TransactionDto dto = new TransactionDto("id01",
+    public ResponseEntity<TransactionDto> createTransaction(@RequestBody CreateTransactionRequest request, UUID id) {
+        TransactionDto dto = new TransactionDto(id,
                 "debit1",
                 "credit1",
                 "1000",
@@ -24,7 +34,7 @@ public class TransactionController {
     }
 
     @GetMapping("/transactions/{id}")
-    public ResponseEntity<TransactionDto> getTransaction(@PathVariable String id) {
+    public ResponseEntity<TransactionDto> getTransaction(@PathVariable UUID id) {
         TransactionDto dto = new TransactionDto(id,
                 "debit23",
                 "credit12",

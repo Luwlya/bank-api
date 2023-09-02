@@ -1,9 +1,10 @@
 package com.luwlya.bankapi.dto;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 public record TransactionDto(
-        String id,
+        UUID id,
         String debitId,
         String creditId,
         String amount,
