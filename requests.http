@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/customers/f698e43d-51fd-4d27-bab5-ca558f8a2934
+GET http://localhost:8080/customers/35159734-948a-4488-99e3-e3ab6e0b9272
 
 ###
 DELETE http://localhost:8080/customers/123
@@ -77,4 +77,4 @@ Content-Type: application/json
 GET http://localhost:8080/transactions
 
 ###
-GET http://localhost:8080/transactions/123
+GET http://localhost:8080/transactions/d769db8a-af10-4724-b1bc-9e91fd9344e0
