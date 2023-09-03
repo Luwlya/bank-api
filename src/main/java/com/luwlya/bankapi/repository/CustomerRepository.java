@@ -14,5 +14,5 @@ public interface CustomerRepository {
 
     void update(Customer customer);
 
-    void delete(String id);
+    boolean delete(UUID id);
 }

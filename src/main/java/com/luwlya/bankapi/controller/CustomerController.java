@@ -31,20 +31,23 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/{id}")
-    public ResponseEntity<CustomerDto> getCustomer(@PathVariable UUID id){
+    public ResponseEntity<CustomerDto> getCustomer(@PathVariable UUID id) {
         CustomerDto dto = customerService.getCustomer(id);
         return ResponseEntity.ok().body(dto);
     }
 
-    @PatchMapping ("/customers/{id}")
-    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable String id, @RequestBody CreateCustomerRequest update) {
+    @PatchMapping("/customers/{id}")
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable UUID id, @RequestBody CreateCustomerRequest update) {
         CustomerDto dto = customerService.updateCustomer(id, update);
         return ResponseEntity.ok().body(dto);
     }
 
     @DeleteMapping("/customers/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable String id){
-        customerService.deleteCustomer(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> deleteCustomer(@PathVariable UUID id) {
+        boolean deleted = customerService.deleteCustomer(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

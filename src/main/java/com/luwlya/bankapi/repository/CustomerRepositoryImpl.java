@@ -1,5 +1,6 @@
 package com.luwlya.bankapi.repository;
 
+import com.luwlya.bankapi.exception.CustomerNotFoundException;
 import com.luwlya.bankapi.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,7 +25,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     private static Customer extractCustomer(ResultSet rs) throws SQLException {
-        rs.next();
         return new Customer(rs.getObject("id", UUID.class),
                 rs.getString("first_name"),
                 rs.getString("last_name"),
@@ -62,6 +63,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         ) {
             statement.setObject(1, id);
             ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) {
+                throw new CustomerNotFoundException(id);
+            }
             return extractCustomer(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -70,7 +74,18 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public List<Customer> getAll() {
-        return null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM customers");
+        ) {
+            List<Customer> customers = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                customers.add(extractCustomer(resultSet));
+            }
+            return customers;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -79,7 +94,15 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public void delete(String id) {
-
+    public boolean delete(UUID id) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM customers WHERE id=?");
+        ) {
+            statement.setObject(1, id);
+            statement.execute();
+            return statement.getUpdateCount() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

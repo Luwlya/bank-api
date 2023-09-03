@@ -37,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private CustomerDto dto(Customer customer) {
-        return new CustomerDto(customer.id().toString(),
+        return new CustomerDto(customer.id(),
                 customer.firstName(),
                 customer.lastName(),
                 customer.email(),
@@ -55,11 +55,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomersListDto getAllCustomers() {
-        return new CustomersListDto(List.of());
+        List<Customer> customers = customerRepository.getAll();
+        List<CustomerDto> result = customers.stream().map(this::dto).toList();
+        return new CustomersListDto(result);
     }
 
     @Override
-    public CustomerDto updateCustomer(String id, CreateCustomerRequest update) {
+    public CustomerDto updateCustomer(UUID id, CreateCustomerRequest update) {
         return new CustomerDto(id,
                 update.firstName(),
                 update.lastName(),
@@ -71,7 +73,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteCustomer(String id) {
-        System.out.println("Customer " + id + " has been deleted");
+    public boolean deleteCustomer(UUID id) {
+        boolean deleted = customerRepository.delete(id);
+        if (deleted) {
+            System.out.println("Customer " + id + " has been deleted");
+        }
+        return deleted;
     }
 }

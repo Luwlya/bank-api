@@ -13,7 +13,7 @@ public interface CustomerService {
 
     CustomersListDto getAllCustomers();
 
-    CustomerDto updateCustomer(String id, CreateCustomerRequest update);
+    CustomerDto updateCustomer(UUID id, CreateCustomerRequest update);
 
-    void deleteCustomer(String id);
+    boolean deleteCustomer(UUID id);
 }

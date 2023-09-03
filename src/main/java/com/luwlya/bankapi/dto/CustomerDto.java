@@ -1,9 +1,10 @@
 package com.luwlya.bankapi.dto;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 public record CustomerDto(
-        String id,
+        UUID id,
         String firstName,
         String lastName,
         String email,
