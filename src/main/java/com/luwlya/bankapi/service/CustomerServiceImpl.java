@@ -64,11 +64,11 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto updateCustomer(UUID id, CreateCustomerRequest update) {
         Customer customer = customerRepository.get(id);
         Customer updatedCustomer = new Customer(id,
-                update.firstName(),
-                customer.lastName(),
-                customer.email(),
-                customer.address(),
-                customer.phone(),
+                update.firstName() != null ? update.firstName() : customer.firstName(),
+                update.lastName() != null ? update.lastName() : customer.lastName(),
+                update.email() != null ? update.email() : customer.email(),
+                update.address() != null ? update.address() : customer.address(),
+                update.phone() != null ? update.phone() : customer.phone(),
                 customer.createdAt(),
                 OffsetDateTime.now());
         customerRepository.update(updatedCustomer);

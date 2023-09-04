@@ -23,7 +23,7 @@ Content-Type: application/json
 
 {
   "firstName": "Kulak",
-  "email": "email",
+  "email": "kuku@ku.com",
   "address": "address",
   "phone": "phone"
 }

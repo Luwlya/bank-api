@@ -91,10 +91,22 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public void update(Customer customer) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("UPDATE customers SET first_name = ? WHERE id=?");
+             PreparedStatement statement = connection.prepareStatement("UPDATE customers " +
+                     "SET first_name = ?, " +
+                     "last_name = ?," +
+                     "email = ?," +
+                     "address =?," +
+                     "phone = ?," +
+                     "updated_at = ?" +
+                     " WHERE id=?");
         ) {
             statement.setObject(1, customer.firstName());
-            statement.setObject(2, customer.id());
+            statement.setObject(2, customer.lastName());
+            statement.setObject(3, customer.email());
+            statement.setObject(4, customer.address());
+            statement.setObject(5, customer.phone());
+            statement.setObject(6, customer.updatedAt());
+            statement.setObject(7, customer.id());
             statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
