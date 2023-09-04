@@ -18,11 +18,11 @@ GET http://localhost:8080/customers
 
 ###
 
-PATCH http://localhost:8080/customers/123
+PATCH http://localhost:8080/customers/6fd087f1-1d68-44f3-b877-cc4c55aec6f2
 Content-Type: application/json
 
 {
-  "lastName": "lastname",
+  "firstName": "Kulak",
   "email": "email",
   "address": "address",
   "phone": "phone"
@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/customers/35159734-948a-4488-99e3-e3ab6e0b9272
+GET http://localhost:8080/customers/6fd087f1-1d68-44f3-b877-cc4c55aec6f2
 
 ###
 DELETE http://localhost:8080/customers/65dbce8d-2706-4247-9097-13bb2a4b5a79

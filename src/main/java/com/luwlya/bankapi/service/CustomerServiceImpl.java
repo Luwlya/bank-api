@@ -62,14 +62,17 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto updateCustomer(UUID id, CreateCustomerRequest update) {
-        return new CustomerDto(id,
+        Customer customer = customerRepository.get(id);
+        Customer updatedCustomer = new Customer(id,
                 update.firstName(),
-                update.lastName(),
-                update.email(),
-                update.address(),
-                update.phone(),
-                OffsetDateTime.now(),
+                customer.lastName(),
+                customer.email(),
+                customer.address(),
+                customer.phone(),
+                customer.createdAt(),
                 OffsetDateTime.now());
+        customerRepository.update(updatedCustomer);
+        return dto(updatedCustomer);
     }
 
     @Override
