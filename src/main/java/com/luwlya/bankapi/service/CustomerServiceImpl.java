@@ -3,7 +3,9 @@ package com.luwlya.bankapi.service;
 import com.luwlya.bankapi.dto.CreateCustomerRequest;
 import com.luwlya.bankapi.dto.CustomerDto;
 import com.luwlya.bankapi.dto.CustomersListDto;
+import com.luwlya.bankapi.exception.CustomerNotFoundException;
 import com.luwlya.bankapi.model.Customer;
+import com.luwlya.bankapi.model.CustomerStatus;
 import com.luwlya.bankapi.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDto createCustomer(CreateCustomerRequest request) {
         Customer customer = new Customer(UUID.randomUUID(),
+                CustomerStatus.ACTIVE,
                 request.firstName(),
                 request.lastName(),
                 request.email(),
@@ -38,6 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     private CustomerDto dto(Customer customer) {
         return new CustomerDto(customer.id(),
+                customer.status(),
                 customer.firstName(),
                 customer.lastName(),
                 customer.email(),
@@ -64,6 +68,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto updateCustomer(UUID id, CreateCustomerRequest update) {
         Customer customer = customerRepository.get(id);
         Customer updatedCustomer = new Customer(id,
+                customer.status(),
                 update.firstName() != null ? update.firstName() : customer.firstName(),
                 update.lastName() != null ? update.lastName() : customer.lastName(),
                 update.email() != null ? update.email() : customer.email(),
@@ -76,11 +81,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean deleteCustomer(UUID id) {
+    public void deleteCustomer(UUID id) {
         boolean deleted = customerRepository.delete(id);
         if (deleted) {
             System.out.println("Customer " + id + " has been deleted");
+        } else {
+            throw new CustomerNotFoundException(id);
         }
-        return deleted;
     }
 }

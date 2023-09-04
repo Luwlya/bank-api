@@ -2,6 +2,7 @@ package com.luwlya.bankapi.repository;
 
 import com.luwlya.bankapi.exception.CustomerNotFoundException;
 import com.luwlya.bankapi.model.Customer;
+import com.luwlya.bankapi.model.CustomerStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +27,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     private static Customer extractCustomer(ResultSet rs) throws SQLException {
         return new Customer(rs.getObject("id", UUID.class),
+                CustomerStatus.valueOf(rs.getString("status")),
                 rs.getString("first_name"),
                 rs.getString("last_name"),
                 rs.getString("email"),
@@ -39,17 +41,18 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public void insert(Customer customer) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "INSERT INTO customers(id,first_name,last_name,email,address,phone,created_at,updated_at) " +
-                             "VALUES (?,?,?,?,?,?,?,?)");
+                     "INSERT INTO customers(id,status, first_name,last_name,email,address,phone,created_at,updated_at) " +
+                             "VALUES (?,?,?,?,?,?,?,?,?)");
         ) {
             statement.setObject(1, customer.id());
-            statement.setString(2, customer.firstName());
-            statement.setString(3, customer.lastName());
-            statement.setString(4, customer.email());
-            statement.setString(5, customer.address());
-            statement.setString(6, customer.phone());
-            statement.setObject(7, customer.createdAt());
-            statement.setObject(8, customer.updatedAt());
+            statement.setString(2, customer.status().name());
+            statement.setString(3, customer.firstName());
+            statement.setString(4, customer.lastName());
+            statement.setString(5, customer.email());
+            statement.setString(6, customer.address());
+            statement.setString(7, customer.phone());
+            statement.setObject(8, customer.createdAt());
+            statement.setObject(9, customer.updatedAt());
             statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -116,9 +119,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public boolean delete(UUID id) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM customers WHERE id=?");
+             PreparedStatement statement = connection.prepareStatement("UPDATE customers SET status = ? WHERE id=? AND status = ?");
         ) {
-            statement.setObject(1, id);
+            statement.setString(1, CustomerStatus.INACTIVE.name());
+            statement.setObject(2, id);
+            statement.setString(3,CustomerStatus.ACTIVE.name());
             statement.execute();
             return statement.getUpdateCount() > 0;
         } catch (SQLException e) {
