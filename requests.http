@@ -5,11 +5,11 @@ POST http://localhost:8080/customers
 Content-Type: application/json
 
 {
-  "firstName": "firstname",
+  "firstName": "hg",
   "lastName": "lastname",
-  "email": "email",
+  "email": "email@dk.com",
   "address": "address",
-  "phone": "phone"
+  "phone": "1234567890"
 }
 
 ###

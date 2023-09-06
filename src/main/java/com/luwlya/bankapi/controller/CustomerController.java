@@ -4,13 +4,16 @@ import com.luwlya.bankapi.dto.CreateCustomerRequest;
 import com.luwlya.bankapi.dto.CustomerDto;
 import com.luwlya.bankapi.dto.CustomersListDto;
 import com.luwlya.bankapi.service.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
+@Validated
 public class CustomerController {
     private CustomerService customerService;
 
@@ -20,7 +23,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customers")
-    public ResponseEntity<CustomerDto> createCustomer(@RequestBody CreateCustomerRequest request) {
+    public ResponseEntity<CustomerDto> createCustomer(@RequestBody @Valid CreateCustomerRequest request) {
         CustomerDto customer = customerService.createCustomer(request);
         return ResponseEntity.ok().body(customer);
     }
