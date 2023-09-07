@@ -1,4 +1,4 @@
-package com.luwlya.bankapi.controller;
+package com.luwlya.bankapi.http.controller;
 
 import com.luwlya.bankapi.dto.CreateCustomerAccountRequest;
 import com.luwlya.bankapi.dto.CustomerAccountDto;

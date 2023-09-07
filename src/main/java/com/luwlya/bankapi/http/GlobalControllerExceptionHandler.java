@@ -1,4 +1,4 @@
-package com.luwlya.bankapi.controller;
+package com.luwlya.bankapi.http;
 
 import com.luwlya.bankapi.dto.Problem;
 import com.luwlya.bankapi.exception.CustomerNotFoundException;
