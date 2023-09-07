@@ -3,6 +3,7 @@ package com.luwlya.bankapi.service;
 import com.luwlya.bankapi.dto.CreateCustomerRequest;
 import com.luwlya.bankapi.dto.CustomerDto;
 import com.luwlya.bankapi.dto.CustomersListDto;
+import com.luwlya.bankapi.dto.UpdateCustomerRequest;
 import com.luwlya.bankapi.exception.CustomerNotFoundException;
 import com.luwlya.bankapi.model.Customer;
 import com.luwlya.bankapi.model.CustomerStatus;
@@ -65,7 +66,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto updateCustomer(UUID id, CreateCustomerRequest update) {
+    public CustomerDto updateCustomer(UUID id, UpdateCustomerRequest update) {
         Customer customer = customerRepository.get(id);
         Customer updatedCustomer = new Customer(id,
                 customer.status(),

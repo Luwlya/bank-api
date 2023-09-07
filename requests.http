@@ -22,10 +22,7 @@ PATCH http://localhost:8080/customers/cb4bce56-4b27-4f53-95a7-a44dbb269f0c
 Content-Type: application/json
 
 {
-  "firstName": "Krok",
-  "email": "kuku@ku.com",
-  "address": "address",
-  "phone": "phone"
+  "phone": "123455666677"
 }
 
 ###

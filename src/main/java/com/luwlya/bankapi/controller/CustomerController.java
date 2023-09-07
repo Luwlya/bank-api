@@ -3,6 +3,7 @@ package com.luwlya.bankapi.controller;
 import com.luwlya.bankapi.dto.CreateCustomerRequest;
 import com.luwlya.bankapi.dto.CustomerDto;
 import com.luwlya.bankapi.dto.CustomersListDto;
+import com.luwlya.bankapi.dto.UpdateCustomerRequest;
 import com.luwlya.bankapi.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,8 @@ public class CustomerController {
     }
 
     @PatchMapping("/customers/{id}")
-    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable UUID id, @RequestBody CreateCustomerRequest update) {
-        CustomerDto dto = customerService.updateCustomer(id, update);
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable UUID id, @RequestBody @Valid UpdateCustomerRequest update) {
+        CustomerDto dto = customerService.updateCustomer(id,update);
         return ResponseEntity.ok().body(dto);
     }
 

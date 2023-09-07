@@ -3,6 +3,7 @@ package com.luwlya.bankapi.service;
 import com.luwlya.bankapi.dto.CreateCustomerRequest;
 import com.luwlya.bankapi.dto.CustomerDto;
 import com.luwlya.bankapi.dto.CustomersListDto;
+import com.luwlya.bankapi.dto.UpdateCustomerRequest;
 
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public interface CustomerService {
 
     CustomersListDto getAllCustomers();
 
-    CustomerDto updateCustomer(UUID id, CreateCustomerRequest update);
+    CustomerDto updateCustomer(UUID id, UpdateCustomerRequest update);
 
     void deleteCustomer(UUID id);
 }
