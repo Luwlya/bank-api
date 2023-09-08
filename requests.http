@@ -76,3 +76,14 @@ GET http://localhost:8080/transactions
 
 ###
 GET http://localhost:8080/transactions/d769db8a-af10-4724-b1bc-9e91fd9344e0
+
+###
+POST http://localhost:8080/managers
+Content-Type: application/json
+
+{
+  "firstName": "Hough",
+  "lastName": "Lori",
+  "email": "email@dk.com",
+  "password": "mypass"
+}
