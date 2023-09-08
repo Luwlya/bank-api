@@ -17,7 +17,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/customers").authenticated()
+                        auth.requestMatchers("/customers").hasRole("ADMIN")
+                                .anyRequest().permitAll()
                 )
                 .httpBasic(Customizer.withDefaults());
         return httpSecurity.build();
