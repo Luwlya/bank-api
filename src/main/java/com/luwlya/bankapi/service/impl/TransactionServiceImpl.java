@@ -1,8 +1,9 @@
-package com.luwlya.bankapi.service;
+package com.luwlya.bankapi.service.impl;
 
-import com.luwlya.bankapi.dto.CreateTransactionRequest;
-import com.luwlya.bankapi.dto.TransactionDto;
-import com.luwlya.bankapi.dto.TransactionListDto;
+import com.luwlya.bankapi.dto.transaction.CreateTransactionRequest;
+import com.luwlya.bankapi.dto.transaction.TransactionDto;
+import com.luwlya.bankapi.dto.transaction.TransactionListDto;
+import com.luwlya.bankapi.service.TransactionService;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

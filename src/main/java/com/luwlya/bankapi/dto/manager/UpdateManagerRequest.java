@@ -1,4 +1,4 @@
-package com.luwlya.bankapi.dto;
+package com.luwlya.bankapi.dto.manager;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;

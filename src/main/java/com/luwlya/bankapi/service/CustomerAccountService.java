@@ -1,9 +1,9 @@
 package com.luwlya.bankapi.service;
 
-import com.luwlya.bankapi.dto.CreateCustomerAccountRequest;
-import com.luwlya.bankapi.dto.CustomerAccountDto;
-import com.luwlya.bankapi.dto.CustomerAccountsListDto;
-import com.luwlya.bankapi.dto.UpdateCustomerAccountRequest;
+import com.luwlya.bankapi.dto.account.CreateCustomerAccountRequest;
+import com.luwlya.bankapi.dto.account.CustomerAccountDto;
+import com.luwlya.bankapi.dto.account.CustomerAccountsListDto;
+import com.luwlya.bankapi.dto.account.UpdateCustomerAccountRequest;
 
 public interface CustomerAccountService {
     CustomerAccountDto createCustomerAccount(CreateCustomerAccountRequest request);

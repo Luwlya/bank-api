@@ -1,4 +1,4 @@
-package com.luwlya.bankapi.dto;
+package com.luwlya.bankapi.dto.manager;
 
 import java.util.List;
 

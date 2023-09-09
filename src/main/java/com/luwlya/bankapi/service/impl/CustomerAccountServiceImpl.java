@@ -1,9 +1,10 @@
-package com.luwlya.bankapi.service;
+package com.luwlya.bankapi.service.impl;
 
-import com.luwlya.bankapi.dto.CreateCustomerAccountRequest;
-import com.luwlya.bankapi.dto.CustomerAccountDto;
-import com.luwlya.bankapi.dto.CustomerAccountsListDto;
-import com.luwlya.bankapi.dto.UpdateCustomerAccountRequest;
+import com.luwlya.bankapi.dto.account.CreateCustomerAccountRequest;
+import com.luwlya.bankapi.dto.account.CustomerAccountDto;
+import com.luwlya.bankapi.dto.account.CustomerAccountsListDto;
+import com.luwlya.bankapi.dto.account.UpdateCustomerAccountRequest;
+import com.luwlya.bankapi.service.CustomerAccountService;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;

@@ -1,13 +1,14 @@
-package com.luwlya.bankapi.service;
+package com.luwlya.bankapi.service.impl;
 
-import com.luwlya.bankapi.dto.CreateManagerRequest;
-import com.luwlya.bankapi.dto.ManagerDto;
-import com.luwlya.bankapi.dto.ManagerListDto;
-import com.luwlya.bankapi.dto.UpdateManagerRequest;
+import com.luwlya.bankapi.dto.manager.CreateManagerRequest;
+import com.luwlya.bankapi.dto.manager.ManagerDto;
+import com.luwlya.bankapi.dto.manager.ManagerListDto;
+import com.luwlya.bankapi.dto.manager.UpdateManagerRequest;
 import com.luwlya.bankapi.exception.CustomerNotFoundException;
 import com.luwlya.bankapi.model.Manager;
 import com.luwlya.bankapi.model.ManagerStatus;
 import com.luwlya.bankapi.repository.ManagerRepository;
+import com.luwlya.bankapi.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

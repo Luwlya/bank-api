@@ -1,9 +1,9 @@
 package com.luwlya.bankapi.service;
 
-import com.luwlya.bankapi.dto.CreateCustomerRequest;
-import com.luwlya.bankapi.dto.CustomerDto;
-import com.luwlya.bankapi.dto.CustomersListDto;
-import com.luwlya.bankapi.dto.UpdateCustomerRequest;
+import com.luwlya.bankapi.dto.customer.CreateCustomerRequest;
+import com.luwlya.bankapi.dto.customer.CustomerDto;
+import com.luwlya.bankapi.dto.customer.CustomersListDto;
+import com.luwlya.bankapi.dto.customer.UpdateCustomerRequest;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package com.luwlya.bankapi.dto;
+package com.luwlya.bankapi.dto.account;
 
 import java.time.OffsetDateTime;
 

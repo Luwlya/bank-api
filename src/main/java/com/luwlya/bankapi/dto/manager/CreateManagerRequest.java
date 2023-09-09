@@ -1,11 +1,9 @@
-package com.luwlya.bankapi.dto;
-
+package com.luwlya.bankapi.dto.manager;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 
-public record CreateCustomerRequest(
+public record CreateManagerRequest(
         @NotBlank
         String firstName,
         @NotBlank
@@ -13,8 +11,7 @@ public record CreateCustomerRequest(
         @Email
         String email,
         @NotBlank
-        String address,
-        @Pattern(regexp = "(\\d+){12}")
-        String phone
+        String password
 ) {
 }
+

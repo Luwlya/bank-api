@@ -1,8 +1,9 @@
-package com.luwlya.bankapi.repository;
+package com.luwlya.bankapi.repository.impl;
 
 import com.luwlya.bankapi.exception.ManagerNotFoundException;
 import com.luwlya.bankapi.model.Manager;
 import com.luwlya.bankapi.model.ManagerStatus;
+import com.luwlya.bankapi.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

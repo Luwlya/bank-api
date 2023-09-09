@@ -1,8 +1,8 @@
 package com.luwlya.bankapi.http.controller;
 
-import com.luwlya.bankapi.dto.CreateTransactionRequest;
-import com.luwlya.bankapi.dto.TransactionDto;
-import com.luwlya.bankapi.dto.TransactionListDto;
+import com.luwlya.bankapi.dto.transaction.CreateTransactionRequest;
+import com.luwlya.bankapi.dto.transaction.TransactionDto;
+import com.luwlya.bankapi.dto.transaction.TransactionListDto;
 import com.luwlya.bankapi.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

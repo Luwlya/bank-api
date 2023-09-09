@@ -1,8 +1,9 @@
-package com.luwlya.bankapi.repository;
+package com.luwlya.bankapi.repository.impl;
 
 import com.luwlya.bankapi.exception.CustomerNotFoundException;
 import com.luwlya.bankapi.model.Customer;
 import com.luwlya.bankapi.model.CustomerStatus;
+import com.luwlya.bankapi.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

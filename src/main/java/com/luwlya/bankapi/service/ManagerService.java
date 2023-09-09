@@ -1,9 +1,9 @@
 package com.luwlya.bankapi.service;
 
-import com.luwlya.bankapi.dto.CreateManagerRequest;
-import com.luwlya.bankapi.dto.ManagerDto;
-import com.luwlya.bankapi.dto.ManagerListDto;
-import com.luwlya.bankapi.dto.UpdateManagerRequest;
+import com.luwlya.bankapi.dto.manager.CreateManagerRequest;
+import com.luwlya.bankapi.dto.manager.ManagerDto;
+import com.luwlya.bankapi.dto.manager.ManagerListDto;
+import com.luwlya.bankapi.dto.manager.UpdateManagerRequest;
 
 import java.util.UUID;
 

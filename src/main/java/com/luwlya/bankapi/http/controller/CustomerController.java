@@ -1,9 +1,9 @@
 package com.luwlya.bankapi.http.controller;
 
-import com.luwlya.bankapi.dto.CreateCustomerRequest;
-import com.luwlya.bankapi.dto.CustomerDto;
-import com.luwlya.bankapi.dto.CustomersListDto;
-import com.luwlya.bankapi.dto.UpdateCustomerRequest;
+import com.luwlya.bankapi.dto.customer.CreateCustomerRequest;
+import com.luwlya.bankapi.dto.customer.CustomerDto;
+import com.luwlya.bankapi.dto.customer.CustomersListDto;
+import com.luwlya.bankapi.dto.customer.UpdateCustomerRequest;
 import com.luwlya.bankapi.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
