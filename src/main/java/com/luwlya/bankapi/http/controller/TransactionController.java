@@ -6,6 +6,8 @@ import com.luwlya.bankapi.dto.transaction.TransactionListDto;
 import com.luwlya.bankapi.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
@@ -13,6 +15,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@Validated
+@Secured("ROLE_ADMIN")
 public class TransactionController {
 
     private TransactionService transactionService;

@@ -7,9 +7,13 @@ import com.luwlya.bankapi.dto.account.UpdateCustomerAccountRequest;
 import com.luwlya.bankapi.service.CustomerAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Validated
+@Secured("ROLE_ADMIN")
 public class CustomerAccountController {
 
     private CustomerAccountService customerAccountService;
