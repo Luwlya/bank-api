@@ -87,3 +87,22 @@ Content-Type: application/json
   "email": "email@dk.com",
   "password": "mypass"
 }
+
+###
+GET http://localhost:8080/managers
+
+###
+
+GET http://localhost:8080/managers/009052ad-f373-4c62-baa8-2c088855f544
+
+###
+PATCH http://localhost:8080/managers/009052ad-f373-4c62-baa8-2c088855f544
+Content-Type: application/json
+
+{
+  "firstName": "Fray",
+  "email": "f.max@ok.ok"
+}
+
+###
+DELETE http://localhost:8080/managers/009052ad-f373-4c62-baa8-2c088855f544
