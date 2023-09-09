@@ -127,4 +127,20 @@ public class ManagerRepositoryImpl implements ManagerRepository {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Manager getByEmail(String email) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM managers WHERE email = ?");
+        ) {
+            statement.setObject(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) {
+                return null;
+            }
+            return extractManager(resultSet);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

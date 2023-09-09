@@ -15,4 +15,6 @@ public interface ManagerRepository {
     void update(Manager manager);
 
     boolean delete(UUID id);
+
+    Manager getByEmail(String email);
 }
