@@ -10,6 +10,7 @@ import com.luwlya.bankapi.model.ManagerStatus;
 import com.luwlya.bankapi.repository.ManagerRepository;
 import com.luwlya.bankapi.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -19,10 +20,12 @@ import java.util.UUID;
 @Service
 public class ManagerServiceImpl implements ManagerService {
     private ManagerRepository managerRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ManagerServiceImpl(ManagerRepository managerRepository) {
+    public ManagerServiceImpl(ManagerRepository managerRepository, PasswordEncoder passwordEncoder) {
         this.managerRepository = managerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class ManagerServiceImpl implements ManagerService {
                 request.firstName(),
                 request.lastName(),
                 request.email(),
-                request.password(),
+                passwordEncoder.encode(request.password()),
                 OffsetDateTime.now(),
                 OffsetDateTime.now());
         System.out.println(request);
@@ -72,7 +75,7 @@ public class ManagerServiceImpl implements ManagerService {
                 update.firstName() != null ? update.firstName() : manager.firstName(),
                 update.lastName() != null ? update.lastName() : manager.lastName(),
                 update.email() != null ? update.email() : manager.email(),
-                update.password() != null ? update.password() : manager.password(),
+                update.password() != null ? passwordEncoder.encode(update.password()) : manager.passwordHash(),
                 manager.createdAt(),
                 OffsetDateTime.now());
         managerRepository.update(updateManager);

@@ -49,7 +49,7 @@ public class ManagerRepositoryImpl implements ManagerRepository {
             statement.setString(3, manager.firstName());
             statement.setString(4, manager.lastName());
             statement.setString(5, manager.email());
-            statement.setString(6, manager.password());
+            statement.setString(6, manager.passwordHash());
             statement.setObject(7, manager.createdAt());
             statement.setObject(8, manager.updatedAt());
             statement.execute();
@@ -104,7 +104,7 @@ public class ManagerRepositoryImpl implements ManagerRepository {
             statement.setObject(1, manager.firstName());
             statement.setObject(2, manager.lastName());
             statement.setObject(3, manager.email());
-            statement.setObject(4, manager.password());
+            statement.setObject(4, manager.passwordHash());
             statement.setObject(5, manager.updatedAt());
             statement.setObject(6, manager.id());
             statement.execute();

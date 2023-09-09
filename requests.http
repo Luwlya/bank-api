@@ -101,7 +101,8 @@ Content-Type: application/json
 
 {
   "firstName": "Fray",
-  "email": "f.max@ok.ok"
+  "email": "f.max@ok.ok",
+  "password": "notmypass"
 }
 
 ###

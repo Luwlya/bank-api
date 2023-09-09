@@ -9,7 +9,7 @@ public record Manager(
         String firstName,
         String lastName,
         String email,
-        String password,
+        String passwordHash,
         OffsetDateTime createdAt,
         OffsetDateTime updatedAt
 ) {
