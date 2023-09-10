@@ -13,4 +13,6 @@ public interface TransactionService {
 
     TransactionListDto getAllTransactions();
 
+    TransactionListDto getTransactionByAccountId(UUID accountId);
+
 }

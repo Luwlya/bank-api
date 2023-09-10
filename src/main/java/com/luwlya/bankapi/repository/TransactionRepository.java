@@ -10,5 +10,7 @@ public interface TransactionRepository {
 
     Transaction get(UUID id);
 
+    List<Transaction> getByAccountId(UUID accountId);
+
     List<Transaction> getAll();
 }
