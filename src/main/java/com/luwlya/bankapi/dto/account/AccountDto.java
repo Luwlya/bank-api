@@ -2,7 +2,7 @@ package com.luwlya.bankapi.dto.account;
 
 import java.time.OffsetDateTime;
 
-public record CustomerAccountDto(
+public record AccountDto(
         String id,
         String customerId,
         String name,
