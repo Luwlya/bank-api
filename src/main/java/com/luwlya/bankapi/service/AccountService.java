@@ -5,14 +5,16 @@ import com.luwlya.bankapi.dto.account.AccountsListDto;
 import com.luwlya.bankapi.dto.account.CreateAccountRequest;
 import com.luwlya.bankapi.dto.account.UpdateAccountRequest;
 
+import java.util.UUID;
+
 public interface AccountService {
     AccountDto createAccount(CreateAccountRequest request);
 
-    AccountDto getAccount(String id);
+    AccountDto getAccount(UUID id);
 
     AccountsListDto getAllAccounts();
 
-    AccountDto updateAccount(String id, UpdateAccountRequest update);
+    AccountDto updateAccount(UUID id, UpdateAccountRequest update);
 
-    void deleteAccount(String id);
+    void deleteAccount(UUID id);
 }

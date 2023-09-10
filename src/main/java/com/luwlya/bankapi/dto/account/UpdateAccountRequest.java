@@ -1,4 +1,6 @@
 package com.luwlya.bankapi.dto.account;
 
-public record UpdateAccountRequest(String balance, String currency) {
+import java.math.BigDecimal;
+
+public record UpdateAccountRequest(BigDecimal balance) {
 }

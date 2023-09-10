@@ -1,10 +1,11 @@
-package com.luwlya.bankapi.dto.transaction;
+package com.luwlya.bankapi.model;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-public record CreateTransactionRequest(
+public record Transaction(
+        UUID id,
         UUID debitAccountId,
         UUID creditAccountId,
         BigDecimal amount,

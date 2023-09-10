@@ -1,12 +1,10 @@
-package com.luwlya.bankapi.dto.account;
-
-import com.luwlya.bankapi.model.Currency;
+package com.luwlya.bankapi.model;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-public record AccountDto(
+public record Account(
         UUID id,
         UUID customerId,
         String name,

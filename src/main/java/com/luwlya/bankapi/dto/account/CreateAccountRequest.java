@@ -1,4 +1,8 @@
 package com.luwlya.bankapi.dto.account;
 
-public record CreateAccountRequest(String currency, String balance) {
+import com.luwlya.bankapi.model.Currency;
+
+import java.math.BigDecimal;
+
+public record CreateAccountRequest(Currency currency, BigDecimal balance) {
 }

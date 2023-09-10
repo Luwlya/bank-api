@@ -10,6 +10,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -29,10 +30,10 @@ public class TransactionController {
     @PostMapping("/transactions")
     public ResponseEntity<TransactionDto> createTransaction(@RequestBody CreateTransactionRequest request, UUID id) {
         TransactionDto dto = new TransactionDto(id,
-                "debit1",
-                "credit1",
-                "1000",
-                "payment",
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                request.amount(),
+                "EUR",
                 OffsetDateTime.now());
         return ResponseEntity.ok().body(dto);
     }
@@ -40,10 +41,10 @@ public class TransactionController {
     @GetMapping("/transactions/{id}")
     public ResponseEntity<TransactionDto> getTransaction(@PathVariable UUID id) {
         TransactionDto dto = new TransactionDto(id,
-                "debit23",
-                "credit12",
-                "100",
-                "money",
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                new BigDecimal(100),
+                "EUR",
                 OffsetDateTime.now());
         return ResponseEntity.ok().body(dto);
     }

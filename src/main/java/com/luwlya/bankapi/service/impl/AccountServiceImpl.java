@@ -4,18 +4,21 @@ import com.luwlya.bankapi.dto.account.AccountDto;
 import com.luwlya.bankapi.dto.account.AccountsListDto;
 import com.luwlya.bankapi.dto.account.CreateAccountRequest;
 import com.luwlya.bankapi.dto.account.UpdateAccountRequest;
+import com.luwlya.bankapi.model.Currency;
 import com.luwlya.bankapi.service.AccountService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto createAccount(CreateAccountRequest request) {
-        return new AccountDto("id1",
-                "customerId12",
+        return new AccountDto(UUID.randomUUID(),
+                UUID.randomUUID(),
                 "name",
                 request.balance(),
                 request.currency(),
@@ -24,12 +27,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto getAccount(String id) {
+    public AccountDto getAccount(UUID id) {
         return new AccountDto(id,
-                "001",
+                UUID.randomUUID(),
                 "Stepan Bandera",
-                "1000",
-                "EUR",
+                new BigDecimal(1000),
+                Currency.EUR,
                 OffsetDateTime.now(),
                 OffsetDateTime.now());
     }
@@ -40,18 +43,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto updateAccount(String id, UpdateAccountRequest update) {
+    public AccountDto updateAccount(UUID id, UpdateAccountRequest update) {
         return new AccountDto(id,
-                "007",
+                UUID.randomUUID(),
                 "Zalujnii",
                 update.balance(),
-                update.currency(),
+                Currency.EUR,
                 OffsetDateTime.now(),
                 OffsetDateTime.now());
     }
 
     @Override
-    public void deleteAccount(String id) {
-        System.out.println("Customer account " + id + " has been deleted");
+    public void deleteAccount(UUID id) {
+        System.out.println("Account " + id + " has been deleted");
     }
 }

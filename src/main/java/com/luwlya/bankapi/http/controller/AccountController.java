@@ -11,6 +11,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @Validated
 @Secured("ROLE_ADMIN")
@@ -36,20 +38,20 @@ public class AccountController {
     }
 
     @GetMapping("/accounts/{id}")
-    public ResponseEntity<AccountDto> getAccount(@PathVariable String id) {
+    public ResponseEntity<AccountDto> getAccount(@PathVariable UUID id) {
         AccountDto accountDto = accountService.getAccount(id);
         return ResponseEntity.ok().body(accountDto);
     }
 
     @PatchMapping("/accounts/{id}")
-    public ResponseEntity<AccountDto> updateCustomerAccount(@PathVariable String id,
+    public ResponseEntity<AccountDto> updateCustomerAccount(@PathVariable UUID id,
                                                             @RequestBody UpdateAccountRequest update) {
         AccountDto accountDto = accountService.updateAccount(id, update);
         return ResponseEntity.ok().body(accountDto);
     }
 
     @DeleteMapping("/accounts/{id}")
-    public ResponseEntity<AccountDto> deleteAccount(@PathVariable String id) {
+    public ResponseEntity<AccountDto> deleteAccount(@PathVariable UUID id) {
         accountService.deleteAccount(id);
         return ResponseEntity.noContent().build();
     }
