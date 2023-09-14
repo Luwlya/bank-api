@@ -15,7 +15,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/customers
-Authorization: Basic email@dk.com mypass
+Authorization: Basic root mypass
 
 ###
 
@@ -49,7 +49,8 @@ Authorization: Basic email@dk.com mypass
 ###
 
 GET http://localhost:8080/accounts/123
-###
+
+1###
 PATCH http://localhost:8080/accounts/123
 Content-Type: application/json
 
