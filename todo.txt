@@ -1,5 +1,5 @@
 Must
-1. implement rest of the entities (customer_account, transactions)
++ 1. implement rest of the entities (customer_account, transactions)
 2. unit test
 3. javadoc
 4. presentation

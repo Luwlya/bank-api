@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -93,14 +92,14 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public TransactionListDto getAllTransactions() {
-        List<Transaction> transactions = new ArrayList<>();
+        List<Transaction> transactions = transactionRepository.getAll();
         List<TransactionDto> result = transactions.stream().map(this::dto).toList();
         return new TransactionListDto(result);
     }
 
     @Override
     public TransactionListDto getTransactionByAccountId(UUID accountId) {
-        List<Transaction> transactions = new ArrayList<>();
+        List<Transaction> transactions = transactionRepository.getByAccountId(accountId);
         List<TransactionDto> result = transactions.stream().map(this::dto).toList();
         return new TransactionListDto(result);
     }
