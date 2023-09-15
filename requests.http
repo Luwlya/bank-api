@@ -51,8 +51,13 @@ GET http://localhost:8080/accounts
 Authorization: Basic email@dk.com mypass
 ###
 
+GET http://localhost:8080/accounts/af07cfeb-22ba-4b71-bc98-1e86b5aed6d9
+Authorization: Basic root mypass
+
+###
 GET http://localhost:8080/accounts/2a4b0104-6ecb-4e2b-bbde-742cd4abc171
 Authorization: Basic root mypass
+
 
 ###
 PATCH http://localhost:8080/accounts/123
@@ -73,7 +78,7 @@ Content-Type: application/json
 {
   "debitAccountId": "af07cfeb-22ba-4b71-bc98-1e86b5aed6d9",
   "creditAccountId": "2a4b0104-6ecb-4e2b-bbde-742cd4abc171",
-  "amount": "100",
+  "amount": "10",
   "description": "money"
 }
 

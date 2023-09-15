@@ -12,6 +12,7 @@ import com.luwlya.bankapi.repository.TransactionRepository;
 import com.luwlya.bankapi.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    @Transactional
     public TransactionDto createTransaction(CreateTransactionRequest request) {
         Account creditAccount = accountRepository.get(request.creditAccountId());
         Account debitAccount = accountRepository.get(request.debitAccountId());

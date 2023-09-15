@@ -4,6 +4,7 @@ import com.luwlya.bankapi.exception.TransactionNotFoundException;
 import com.luwlya.bankapi.model.Transaction;
 import com.luwlya.bankapi.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -35,7 +36,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     @Override
     public void insert(Transaction transaction) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "INSERT INTO transactions(id,debit_account_id, credit_account_id, amount, description, created_at) " +
                              "VALUES (?,?,?,?,?,?)");
@@ -52,9 +53,13 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         }
     }
 
+    private Connection getConnection() throws SQLException {
+        return DataSourceUtils.getConnection(dataSource);
+    }
+
     @Override
     public Transaction get(UUID id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM transactions WHERE id = ?");
         ) {
             statement.setObject(1, id);
@@ -70,7 +75,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     @Override
     public List<Transaction> getByAccountId(UUID accountId) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "SELECT * FROM transactions WHERE debit_account_id = ? OR credit_account_id = ?"
              );
@@ -91,7 +96,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     @Override
     public List<Transaction> getAll() {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM transactions");
         ) {
             List<Transaction> transactions = new ArrayList<>();

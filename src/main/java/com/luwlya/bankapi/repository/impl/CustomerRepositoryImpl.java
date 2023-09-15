@@ -5,6 +5,7 @@ import com.luwlya.bankapi.model.Customer;
 import com.luwlya.bankapi.model.CustomerStatus;
 import com.luwlya.bankapi.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -40,7 +41,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public void insert(Customer customer) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "INSERT INTO customers(id,status, first_name,last_name,email,address,phone,created_at,updated_at) " +
                              "VALUES (?,?,?,?,?,?,?,?,?)");
@@ -62,7 +63,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public Customer get(UUID id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM customers WHERE id = ?");
         ) {
             statement.setObject(1, id);
@@ -78,7 +79,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public List<Customer> getAll() {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM customers");
         ) {
             List<Customer> customers = new ArrayList<>();
@@ -94,7 +95,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public void update(Customer customer) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("UPDATE customers " +
                      "SET first_name = ?, " +
                      "last_name = ?," +
@@ -119,7 +120,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public boolean delete(UUID id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("UPDATE customers SET status = ? WHERE id=? AND status = ?");
         ) {
             statement.setString(1, CustomerStatus.INACTIVE.name());
@@ -130,5 +131,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Connection getConnection() throws SQLException {
+        return DataSourceUtils.getConnection(dataSource);
     }
 }

@@ -5,6 +5,7 @@ import com.luwlya.bankapi.model.Manager;
 import com.luwlya.bankapi.model.ManagerStatus;
 import com.luwlya.bankapi.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -39,7 +40,7 @@ public class ManagerRepositoryImpl implements ManagerRepository {
 
     @Override
     public void insert(Manager manager) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "INSERT INTO managers(id,status, first_name,last_name,email,password,created_at,updated_at) " +
                              "VALUES (?,?,?,?,?,?,?,?)");
@@ -58,9 +59,13 @@ public class ManagerRepositoryImpl implements ManagerRepository {
         }
     }
 
+    private Connection getConnection() throws SQLException {
+        return DataSourceUtils.getConnection(dataSource);
+    }
+
     @Override
     public Manager get(UUID id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM managers WHERE id = ?");
         ) {
             statement.setObject(1, id);
@@ -76,7 +81,7 @@ public class ManagerRepositoryImpl implements ManagerRepository {
 
     @Override
     public List<Manager> getAll() {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM managers");
         ) {
             List<Manager> managers = new ArrayList<>();
@@ -92,7 +97,7 @@ public class ManagerRepositoryImpl implements ManagerRepository {
 
     @Override
     public void update(Manager manager) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("UPDATE managers " +
                      "SET first_name = ?, " +
                      "last_name = ?," +
@@ -115,7 +120,7 @@ public class ManagerRepositoryImpl implements ManagerRepository {
 
     @Override
     public boolean delete(UUID id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("UPDATE managers SET status = ? WHERE id=? AND status = ?");
         ) {
             statement.setString(1, ManagerStatus.INACTIVE.name());
@@ -130,7 +135,7 @@ public class ManagerRepositoryImpl implements ManagerRepository {
 
     @Override
     public Manager getByEmail(String email) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM managers WHERE email = ?");
         ) {
             statement.setObject(1, email);

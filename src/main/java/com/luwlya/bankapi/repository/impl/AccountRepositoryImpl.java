@@ -6,6 +6,7 @@ import com.luwlya.bankapi.model.AccountStatus;
 import com.luwlya.bankapi.model.Currency;
 import com.luwlya.bankapi.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -39,7 +40,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public void insert(Account account) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "INSERT INTO accounts(id,customer_id, name,balance,currency,created_at,updated_at, status) " +
                              "VALUES (?,?,?,?,?,?,?,?)");
@@ -60,7 +61,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public Account get(UUID id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM accounts WHERE id = ?");
         ) {
             statement.setObject(1, id);
@@ -74,10 +75,14 @@ public class AccountRepositoryImpl implements AccountRepository {
         }
     }
 
+    private Connection getConnection() throws SQLException {
+        return DataSourceUtils.getConnection(dataSource);
+    }
+
     @Override
     public List<Account> getAll() {
-        try (Connection connection = dataSource.getConnection();
-                    PreparedStatement statement = connection.prepareStatement("SELECT * FROM accounts");
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM accounts");
         ) {
             List<Account> accounts = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
@@ -92,7 +97,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public void update(Account account) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("UPDATE accounts " +
                      "SET balance = ?, " +
                      "updated_at = ?" +
@@ -109,7 +114,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public boolean delete(UUID id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement("UPDATE accounts SET status = ? WHERE id=? AND status = ?");
         ) {
             statement.setString(1, AccountStatus.INACTIVE.name());
