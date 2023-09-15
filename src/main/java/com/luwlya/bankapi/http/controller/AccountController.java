@@ -5,6 +5,7 @@ import com.luwlya.bankapi.dto.account.AccountsListDto;
 import com.luwlya.bankapi.dto.account.CreateAccountRequest;
 import com.luwlya.bankapi.dto.account.UpdateAccountRequest;
 import com.luwlya.bankapi.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -26,7 +27,7 @@ public class AccountController {
     }
 
     @PostMapping("/accounts")
-    public ResponseEntity<AccountDto> createAccount(@RequestBody CreateAccountRequest request) {
+    public ResponseEntity<AccountDto> createAccount(@RequestBody @Valid CreateAccountRequest request) {
         AccountDto customerAccount = accountService.createAccount(request);
         return ResponseEntity.ok().body(customerAccount);
     }

@@ -31,25 +31,27 @@ public class AccountRepositoryImpl implements AccountRepository {
                 rs.getObject("customer_id", UUID.class),
                 rs.getString("name"),
                 rs.getBigDecimal("balance"),
-                rs.getObject("currency",Currency.class),
+                Currency.valueOf(rs.getString("currency")),
                 rs.getObject("created_at", OffsetDateTime.class),
-                rs.getObject("updated_at", OffsetDateTime.class));
+                rs.getObject("updated_at", OffsetDateTime.class),
+                AccountStatus.valueOf(rs.getString("status")));
     }
 
     @Override
     public void insert(Account account) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "INSERT INTO accounts(id,customer_id, name,balance,currency,created_at,updated_at) " +
-                             "VALUES (?,?,?,?,?,?,?)");
+                     "INSERT INTO accounts(id,customer_id, name,balance,currency,created_at,updated_at, status) " +
+                             "VALUES (?,?,?,?,?,?,?,?)");
         ) {
             statement.setObject(1, account.id());
             statement.setObject(2, account.customerId());
             statement.setString(3, account.name());
             statement.setBigDecimal(4, account.balance());
-            statement.setObject(5, account.currency());
+            statement.setObject(5, account.currency().name());
             statement.setObject(6, account.createdAt());
             statement.setObject(7, account.updatedAt());
+            statement.setObject(8, account.status().name());
             statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -98,7 +100,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         ) {
             statement.setObject(1, account.balance());
             statement.setObject(2, account.updatedAt());
-            statement.setObject(7, account.id());
+            statement.setObject(3, account.id());
             statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);

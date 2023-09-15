@@ -2,14 +2,15 @@ GET http://localhost:8080/health
 
 ###
 POST http://localhost:8080/customers
+Authorization: Basic root mypass
 Content-Type: application/json
 
 {
-  "firstName": "hg",
-  "lastName": "lastname",
-  "email": "email@dk.com",
+  "firstName": "Hahn",
+  "lastName": "Kuhn",
+  "email": "hahnk@dk.com",
   "address": "address",
-  "phone": "1234567890"
+  "phone": "1234567890123"
 }
 
 ###
@@ -35,12 +36,14 @@ DELETE http://localhost:8080/customers/cb4bce56-4b27-4f53-95a7-a44dbb269f0c
 
 ###
 POST http://localhost:8080/accounts
-Authorization: Basic email@dk.com mypass
+Authorization: Basic root mypass
 Content-Type: application/json
 
 {
-  "balance": "100",
-  "currency": "EURO"
+  "balance": 900,
+  "currency": "EUR",
+  "customerId": "d2451aec-2a56-4cf5-9f96-2607ed1ffd62",
+  "name": "Bar"
 }
 
 ###
@@ -48,9 +51,10 @@ GET http://localhost:8080/accounts
 Authorization: Basic email@dk.com mypass
 ###
 
-GET http://localhost:8080/accounts/123
+GET http://localhost:8080/accounts/2a4b0104-6ecb-4e2b-bbde-742cd4abc171
+Authorization: Basic root mypass
 
-1###
+###
 PATCH http://localhost:8080/accounts/123
 Content-Type: application/json
 
@@ -63,21 +67,23 @@ Content-Type: application/json
 DELETE http://localhost:8080/accounts/123
 ###
 POST http://localhost:8080/transactions
-Authorization: Basic email@dk.com mypass
+Authorization: Basic root mypass
 Content-Type: application/json
 
 {
-  "debitId": "debit1",
-  "creditId": "credit1",
+  "debitAccountId": "af07cfeb-22ba-4b71-bc98-1e86b5aed6d9",
+  "creditAccountId": "2a4b0104-6ecb-4e2b-bbde-742cd4abc171",
   "amount": "100",
   "description": "money"
 }
 
 ###
-GET http://localhost:8080/transactions
+GET http://localhost:8080/transactions/
+Authorization: Basic root mypass
 
 ###
-GET http://localhost:8080/transactions/d769db8a-af10-4724-b1bc-9e91fd9344e0
+GET http://localhost:8080/transactions/ad41bb47-7737-40c2-b430-edc2f2c2bbda
+Authorization: Basic root mypass
 
 ###
 POST http://localhost:8080/managers

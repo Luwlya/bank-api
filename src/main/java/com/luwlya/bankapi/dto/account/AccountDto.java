@@ -1,5 +1,6 @@
 package com.luwlya.bankapi.dto.account;
 
+import com.luwlya.bankapi.model.AccountStatus;
 import com.luwlya.bankapi.model.Currency;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ public record AccountDto(
         BigDecimal balance,
         Currency currency,
         OffsetDateTime createdAt,
-        OffsetDateTime updatedAt
+        OffsetDateTime updatedAt,
+        AccountStatus status
 ) {
 }

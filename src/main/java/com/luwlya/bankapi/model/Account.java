@@ -11,6 +11,7 @@ public record Account(
         BigDecimal balance,
         Currency currency,
         OffsetDateTime createdAt,
-        OffsetDateTime updatedAt
+        OffsetDateTime updatedAt,
+        AccountStatus status
 ) {
 }
