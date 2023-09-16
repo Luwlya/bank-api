@@ -12,6 +12,7 @@ import com.luwlya.bankapi.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -19,10 +20,12 @@ import java.util.UUID;
 @Service
 public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
+    private Clock clock;
 
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, Clock clock) {
         this.accountRepository = accountRepository;
+        this.clock = clock;
     }
 
     @Override
@@ -33,8 +36,8 @@ public class AccountServiceImpl implements AccountService {
                 request.name(),
                 request.balance(),
                 request.currency(),
-                OffsetDateTime.now(),
-                OffsetDateTime.now(),
+                OffsetDateTime.now(clock),
+                OffsetDateTime.now(clock),
                 AccountStatus.ACTIVE);
         accountRepository.insert(account);
         return dto(account);
@@ -74,7 +77,7 @@ public class AccountServiceImpl implements AccountService {
                 update.balance() != null ? update.balance() : account.balance(),
                 account.currency(),
                 account.createdAt(),
-                OffsetDateTime.now(),
+                OffsetDateTime.now(clock),
                 AccountStatus.ACTIVE);
         accountRepository.update(updateAccount);
         return dto(updateAccount);

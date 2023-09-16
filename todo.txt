@@ -8,8 +8,9 @@ Optional
 1. add logging instead of println
 2. add jwt auth
 3. deploy
-4. hibernate
+4. hibernate/jdbc template/jpa repository
 5. swagger
 6. code coverage
 7. frontend
+8. race condition during transaction creation
 
