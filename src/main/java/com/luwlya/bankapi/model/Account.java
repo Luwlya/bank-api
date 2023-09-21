@@ -1,9 +1,12 @@
 package com.luwlya.bankapi.model;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
+
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+@RecordBuilder
 public record Account(
         UUID id,
         UUID customerId,
@@ -13,5 +16,5 @@ public record Account(
         OffsetDateTime createdAt,
         OffsetDateTime updatedAt,
         AccountStatus status
-) {
+) implements AccountBuilder.With{
 }

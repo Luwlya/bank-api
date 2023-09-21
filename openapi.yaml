@@ -1,0 +1,543 @@
+openapi: "3.0.3"
+info:
+  title: "bank_api API"
+  description: "bank_api API"
+  version: "1.0.0"
+servers:
+  - url: "https://bank_api"
+paths:
+  /accounts:
+    get:
+      summary: "GET accounts"
+      operationId: "getAllAccounts"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AccountsListDto"
+    post:
+      summary: "POST accounts"
+      operationId: "createAccount"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAccountRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+  /accounts/{id}:
+    get:
+      summary: "GET accounts/{id}"
+      operationId: "getAccount"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+    patch:
+      summary: "PATCH accounts/{id}"
+      operationId: "updateCustomerAccount"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAccountRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+    delete:
+      summary: "DELETE accounts/{id}"
+      operationId: "deleteAccount"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+  /health:
+    get:
+      summary: "GET health"
+      operationId: "healthCheck"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /managers:
+    get:
+      summary: "GET managers"
+      operationId: "getAllManagers"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ManagerListDto"
+    post:
+      summary: "POST managers"
+      operationId: "createManager"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateManagerRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ManagerDto"
+  /managers/{id}:
+    get:
+      summary: "GET managers/{id}"
+      operationId: "getManager"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ManagerDto"
+    patch:
+      summary: "PATCH managers/{id}"
+      operationId: "updateManager"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateManagerRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ManagerDto"
+    delete:
+      summary: "DELETE managers/{id}"
+      operationId: "deleteManager"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+  /customers:
+    get:
+      summary: "GET customers"
+      operationId: "getAllCustomers"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CustomersListDto"
+    post:
+      summary: "POST customers"
+      operationId: "createCustomer"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCustomerRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CustomerDto"
+  /customers/{id}:
+    get:
+      summary: "GET customers/{id}"
+      operationId: "getCustomer"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CustomerDto"
+    patch:
+      summary: "PATCH customers/{id}"
+      operationId: "updateCustomer"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCustomerRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CustomerDto"
+    delete:
+      summary: "DELETE customers/{id}"
+      operationId: "deleteCustomer"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+  /transactions:
+    get:
+      summary: "GET transactions"
+      operationId: "getAllTransactions"
+      parameters:
+        - name: "accountId"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TransactionListDto"
+    post:
+      summary: "POST transactions"
+      operationId: "createTransaction"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTransactionRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TransactionDto"
+  /transactions/{id}:
+    get:
+      summary: "GET transactions/{id}"
+      operationId: "getTransaction"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TransactionDto"
+components:
+  schemas:
+    BigDecimal:
+      type: "object"
+      properties: { }
+    AccountDto:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        customerId:
+          type: "string"
+          format: "uuid"
+        name:
+          type: "string"
+        balance:
+          $ref: "#/components/schemas/BigDecimal"
+        currency:
+          type: "string"
+          enum:
+            - "EUR"
+            - "USD"
+            - "UAH"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
+        status:
+          type: "string"
+          enum:
+            - "ACTIVE"
+            - "INACTIVE"
+    AccountsListDto:
+      type: "object"
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AccountDto"
+    CreateAccountRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        currency:
+          type: "string"
+          enum:
+            - "EUR"
+            - "USD"
+            - "UAH"
+        balance:
+          $ref: "#/components/schemas/BigDecimal"
+        customerId:
+          type: "string"
+          format: "uuid"
+    UpdateAccountRequest:
+      type: "object"
+      properties:
+        balance:
+          $ref: "#/components/schemas/BigDecimal"
+    ManagerDto:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        email:
+          type: "string"
+        status:
+          type: "string"
+          enum:
+            - "ACTIVE"
+            - "INACTIVE"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
+    ManagerListDto:
+      type: "object"
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ManagerDto"
+    CreateManagerRequest:
+      type: "object"
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        email:
+          type: "string"
+        password:
+          type: "string"
+    UpdateManagerRequest:
+      type: "object"
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        email:
+          type: "string"
+        password:
+          type: "string"
+    Void:
+      type: "object"
+      properties: { }
+    CustomerDto:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        status:
+          type: "string"
+          enum:
+            - "ACTIVE"
+            - "INACTIVE"
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        email:
+          type: "string"
+        address:
+          type: "string"
+        phone:
+          type: "string"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
+    CustomersListDto:
+      type: "object"
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CustomerDto"
+    CreateCustomerRequest:
+      type: "object"
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        email:
+          type: "string"
+        address:
+          type: "string"
+        phone:
+          type: "string"
+    UpdateCustomerRequest:
+      type: "object"
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        email:
+          type: "string"
+        address:
+          type: "string"
+        phone:
+          type: "string"
+    TransactionDto:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        debitAccountId:
+          type: "string"
+          format: "uuid"
+        creditAccountId:
+          type: "string"
+          format: "uuid"
+        amount:
+          $ref: "#/components/schemas/BigDecimal"
+        description:
+          type: "string"
+        createdAt:
+          type: "string"
+          format: "date-time"
+    TransactionListDto:
+      type: "object"
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TransactionDto"
+    CreateTransactionRequest:
+      type: "object"
+      properties:
+        debitAccountId:
+          type: "string"
+          format: "uuid"
+        creditAccountId:
+          type: "string"
+          format: "uuid"
+        amount:
+          $ref: "#/components/schemas/BigDecimal"
+        description:
+          type: "string"

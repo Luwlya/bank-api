@@ -9,15 +9,16 @@ import java.util.UUID;
 
 public class TestAccountRepository implements AccountRepository {
     public List<Account> inserted = new ArrayList<>();
+    public Account accountForGet;
 
     @Override
     public void insert(Account account) {
-       inserted.add(account);
+        inserted.add(account);
     }
 
     @Override
     public Account get(UUID id) {
-        return null;
+        return accountForGet.withId(id);
     }
 
     @Override

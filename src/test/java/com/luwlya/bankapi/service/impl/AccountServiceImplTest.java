@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class AccountServiceImplTest {
     private AccountServiceImpl unit;
     private TestAccountRepository testAccountRepository;
-    private Clock clock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
+    private Clock clock = Clock.fixed(Instant.now(), ZoneId.systemDefault()); //to encapsulate current time getting
 
     @BeforeEach
     void setUp() {
@@ -37,15 +37,15 @@ class AccountServiceImplTest {
         //when
         AccountDto result = unit.createAccount(request);
         //then
-        assertEquals(request.name(),result.name());
-        assertEquals(request.currency(),result.currency());
-        assertEquals(request.balance(),result.balance());
+        assertEquals(request.name(), result.name());
+        assertEquals(request.currency(), result.currency());
+        assertEquals(request.balance(), result.balance());
         assertNotNull(result.id());
         assertEquals(request.customerId(), result.customerId());
         assertEquals(AccountStatus.ACTIVE, result.status());
         assertEquals(OffsetDateTime.now(clock), result.createdAt());
         assertEquals(OffsetDateTime.now(clock), result.updatedAt());
-        assertEquals(1,testAccountRepository.inserted.size());
+        assertEquals(1, testAccountRepository.inserted.size());
         Account expected = new Account(result.id(),
                 request.customerId(),
                 request.name(),
@@ -59,6 +59,29 @@ class AccountServiceImplTest {
 
     @Test
     void getAccount() {
+        //given
+        UUID id = UUID.randomUUID();
+        Account account = new Account(
+                id,
+                UUID.randomUUID(),
+                "Account",
+                new BigDecimal(1000),
+                Currency.EUR,
+                OffsetDateTime.now(clock),
+                OffsetDateTime.now(clock),
+                AccountStatus.ACTIVE);
+        //not has a logic of account's type
+        testAccountRepository.accountForGet = account;
+        //when
+        AccountDto res = unit.getAccount(id);
+        //then
+        assertEquals(id, res.id());//assert result id
+        assertEquals(account.customerId(), res.customerId()); //assert result customer id
+        assertEquals(account.currency(), res.currency());
+        assertEquals(account.balance(), res.balance());
+        assertEquals(account.status(), res.status());
+        assertEquals(account.createdAt(), res.createdAt());
+        assertEquals(account.updatedAt(), res.updatedAt());
     }
 
     @Test
