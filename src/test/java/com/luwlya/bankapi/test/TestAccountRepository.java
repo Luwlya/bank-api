@@ -10,6 +10,10 @@ import java.util.UUID;
 public class TestAccountRepository implements AccountRepository {
     public List<Account> inserted = new ArrayList<>();
     public Account accountForGet;
+    public List<Account> accountsForGetAll;
+    public List<Account> updated = new ArrayList<>();
+    public List<UUID> deleted = new ArrayList<>();
+    public boolean deleteResult;
 
     @Override
     public void insert(Account account) {
@@ -23,16 +27,17 @@ public class TestAccountRepository implements AccountRepository {
 
     @Override
     public List<Account> getAll() {
-        return null;
+        return accountsForGetAll;
     }
 
     @Override
     public void update(Account account) {
-
+        updated.add(account);
     }
 
     @Override
     public boolean delete(UUID id) {
-        return false;
+        deleted.add(id);
+        return deleteResult;
     }
 }
