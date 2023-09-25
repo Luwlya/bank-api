@@ -14,10 +14,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
-//@Secured("ROLE_ADMIN")
-// .authorizeHttpRequests(auth -> auth.requestMatchers("/customers").hasRole("ADMIN")
-//    .anyRequest().permitAll()
-
+    /**
+     * Configure http security
+     *
+     * @param httpSecurity instance of http security to configure
+     * @return configured security filter chain
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(csrf -> csrf.disable())

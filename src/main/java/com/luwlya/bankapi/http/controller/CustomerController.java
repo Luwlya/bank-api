@@ -44,7 +44,7 @@ public class CustomerController {
 
     @PatchMapping("/customers/{id}")
     public ResponseEntity<CustomerDto> updateCustomer(@PathVariable UUID id, @RequestBody @Valid UpdateCustomerRequest update) {
-        CustomerDto dto = customerService.updateCustomer(id,update);
+        CustomerDto dto = customerService.updateCustomer(id, update);
         return ResponseEntity.ok().body(dto);
     }
 

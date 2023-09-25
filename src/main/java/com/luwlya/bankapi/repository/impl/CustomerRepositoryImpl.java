@@ -125,7 +125,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         ) {
             statement.setString(1, CustomerStatus.INACTIVE.name());
             statement.setObject(2, id);
-            statement.setString(3,CustomerStatus.ACTIVE.name());
+            statement.setString(3, CustomerStatus.ACTIVE.name());
             statement.execute();
             return statement.getUpdateCount() > 0;
         } catch (SQLException e) {

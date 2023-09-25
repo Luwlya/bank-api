@@ -16,5 +16,5 @@ public record CustomerDto(
         OffsetDateTime createdAt,
         OffsetDateTime updatedAt
 ) {
-    
+
 }

@@ -16,6 +16,9 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Implements main operations on customers
+ */
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
@@ -25,6 +28,12 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    /**
+     * Creates customer and persists it in db
+     *
+     * @param request parameters for customer creation
+     * @return dto of created customer
+     */
     @Override
     public CustomerDto createCustomer(CreateCustomerRequest request) {
         Customer customer = new Customer(UUID.randomUUID(),
@@ -36,7 +45,6 @@ public class CustomerServiceImpl implements CustomerService {
                 request.phone(),
                 OffsetDateTime.now(),
                 OffsetDateTime.now());
-        System.out.println(request);
         customerRepository.insert(customer);
         return dto(customer);
     }

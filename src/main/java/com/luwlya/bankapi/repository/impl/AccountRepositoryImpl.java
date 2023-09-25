@@ -18,6 +18,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 @Repository
 public class AccountRepositoryImpl implements AccountRepository {
     private DataSource dataSource;
@@ -119,7 +120,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         ) {
             statement.setString(1, AccountStatus.INACTIVE.name());
             statement.setObject(2, id);
-            statement.setString(3,AccountStatus.ACTIVE.name());
+            statement.setString(3, AccountStatus.ACTIVE.name());
             statement.execute();
             return statement.getUpdateCount() > 0;
         } catch (SQLException e) {

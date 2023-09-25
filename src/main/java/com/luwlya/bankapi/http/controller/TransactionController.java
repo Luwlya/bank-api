@@ -37,10 +37,16 @@ public class TransactionController {
         return ResponseEntity.ok().body(dto);
     }
 
+    /**
+     * Represents GET /transactions endpoint
+     * @param accountId identifier of the account to get transaction for.
+     *                  If null then gets all transactions for all accounts
+     * @return http response with transactions list
+     */
     @GetMapping("/transactions")
     public ResponseEntity<TransactionListDto> getAllTransactions(@RequestParam(required = false) UUID accountId) {
         TransactionListDto listDto;
-        if(accountId != null){
+        if (accountId != null) {
             listDto = transactionService.getTransactionByAccountId(accountId);
         } else {
             listDto = transactionService.getAllTransactions();

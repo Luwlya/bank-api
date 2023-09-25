@@ -13,10 +13,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalControllerExceptionHandler {
     @ExceptionHandler(CustomerNotFoundException.class)
-    public ResponseEntity<Problem> handleCustomerNotFound(CustomerNotFoundException exception){
-       return ResponseEntity.status(404).body(new Problem(404, "NOT_FOUND", exception.getMessage()));
+    public ResponseEntity<Problem> handleCustomerNotFound(CustomerNotFoundException exception) {
+        return ResponseEntity.status(404).body(new Problem(404, "NOT_FOUND", exception.getMessage()));
     }
 
+    /**
+     * turns ConstraintViolationException into 400 http response
+     *
+     * @param exception instance of exception
+     * @return http response
+     */
     @ExceptionHandler(ConstraintViolationException.class)
     ResponseEntity<Problem> handleConstraintViolationException(ConstraintViolationException exception) {
         return ResponseEntity.status(400).body(new Problem(400, "BAD_REQUEST", exception.getMessage()));
@@ -28,12 +34,12 @@ public class GlobalControllerExceptionHandler {
     }
 
     @ExceptionHandler(ManagerNotFoundException.class)
-    public ResponseEntity<Problem> handleManagerNotFound(ManagerNotFoundException exception){
+    public ResponseEntity<Problem> handleManagerNotFound(ManagerNotFoundException exception) {
         return ResponseEntity.status(404).body(new Problem(404, "NOT_FOUND", exception.getMessage()));
     }
 
     @ExceptionHandler(InsufficientBalanceException.class)
-    public ResponseEntity<Problem> handleInsufficientBalance(InsufficientBalanceException exception){
+    public ResponseEntity<Problem> handleInsufficientBalance(InsufficientBalanceException exception) {
         return ResponseEntity.status(400).body(new Problem(400, "BAD_REQUEST", exception.getMessage()));
     }
 }

@@ -16,6 +16,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 @Repository
 public class TransactionRepositoryImpl implements TransactionRepository {
     private DataSource dataSource;
@@ -45,7 +46,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
             statement.setObject(2, transaction.debitAccountId());
             statement.setObject(3, transaction.creditAccountId());
             statement.setBigDecimal(4, transaction.amount());
-            statement.setString(5,transaction.description());
+            statement.setString(5, transaction.description());
             statement.setObject(6, transaction.createdAt());
             statement.execute();
         } catch (SQLException e) {

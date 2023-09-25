@@ -16,7 +16,7 @@ public class DbConfig {
     public DataSource dataSource;
 
     @Bean
-    public PlatformTransactionManager platformTransactionManager(){
+    public PlatformTransactionManager platformTransactionManager() {
         return new DataSourceTransactionManager(dataSource);
     }
 }

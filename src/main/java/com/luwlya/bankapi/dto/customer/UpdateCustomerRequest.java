@@ -10,7 +10,7 @@ public record UpdateCustomerRequest(
         @Size(min = 1, max = 50)
         String lastName,
         @Email
-        String email,                                        
+        String email,
         @Size(min = 1, max = 50)
         String address,
         @Pattern(regexp = "(\\d+){12}")
