@@ -1,15 +1,15 @@
 Must
 + 1. implement rest of the entities (customer_account, transactions)
-2. unit test
-3. javadoc
-4. presentation
++ 2. unit test
++ 3. javadoc
++ 4. presentation
 
 Optional
 1. add logging instead of println
 2. add jwt auth
 3. deploy
 4. hibernate/jdbc template/jpa repository
-5. swagger
++ 5. swagger
 6. code coverage
 7. frontend
 8. race condition during transaction creation

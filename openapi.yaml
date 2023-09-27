@@ -1,24 +1,24 @@
 openapi: "3.0.3"
 info:
-  title: "bank_api API"
-  description: "bank_api API"
+  title: Bank API
+  description: API for Bank Backend that provides CRUD-operations for accounts, customers, transactions and managers
   version: "1.0.0"
 servers:
-  - url: "https://bank_api"
+  - url: "https://api.bank.com"
 paths:
   /accounts:
     get:
-      summary: "GET accounts"
+      summary: Get all accounts
       operationId: "getAllAccounts"
       responses:
         "200":
-          description: "OK"
+          description: List of all accounts
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/AccountsListDto"
     post:
-      summary: "POST accounts"
+      summary: Create new account
       operationId: "createAccount"
       requestBody:
         content:
@@ -28,14 +28,14 @@ paths:
         required: true
       responses:
         "200":
-          description: "OK"
+          description: Account was successfully created
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/AccountDto"
   /accounts/{id}:
     get:
-      summary: "GET accounts/{id}"
+      summary: Get the account with given id
       operationId: "getAccount"
       parameters:
         - name: "id"
@@ -46,13 +46,13 @@ paths:
             format: "uuid"
       responses:
         "200":
-          description: "OK"
+          description: Account information
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/AccountDto"
     patch:
-      summary: "PATCH accounts/{id}"
+      summary: Update account balance
       operationId: "updateCustomerAccount"
       parameters:
         - name: "id"
@@ -69,13 +69,13 @@ paths:
         required: true
       responses:
         "200":
-          description: "OK"
+          description: Account was successfully updated
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/AccountDto"
     delete:
-      summary: "DELETE accounts/{id}"
+      summary: Deactivate account with given id
       operationId: "deleteAccount"
       parameters:
         - name: "id"
@@ -85,36 +85,21 @@ paths:
             type: "string"
             format: "uuid"
       responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/AccountDto"
-  /health:
-    get:
-      summary: "GET health"
-      operationId: "healthCheck"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                type: "string"
+        "204":
+          description: Account with given id was successfully deactivated
   /managers:
     get:
-      summary: "GET managers"
+      summary: Get all managers
       operationId: "getAllManagers"
       responses:
         "200":
-          description: "OK"
+          description: List of all managers
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ManagerListDto"
     post:
-      summary: "POST managers"
+      summary: Create manager
       operationId: "createManager"
       requestBody:
         content:
@@ -124,14 +109,14 @@ paths:
         required: true
       responses:
         "200":
-          description: "OK"
+          description: Manager was successfully created
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ManagerDto"
   /managers/{id}:
     get:
-      summary: "GET managers/{id}"
+      summary: Get manager with given id
       operationId: "getManager"
       parameters:
         - name: "id"
@@ -142,13 +127,13 @@ paths:
             format: "uuid"
       responses:
         "200":
-          description: "OK"
+          description: Manager information
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ManagerDto"
     patch:
-      summary: "PATCH managers/{id}"
+      summary: Update manager information
       operationId: "updateManager"
       parameters:
         - name: "id"
@@ -165,13 +150,13 @@ paths:
         required: true
       responses:
         "200":
-          description: "OK"
+          description: Manager was successfully updated
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ManagerDto"
     delete:
-      summary: "DELETE managers/{id}"
+      summary: Deactivate manager with given id
       operationId: "deleteManager"
       parameters:
         - name: "id"
@@ -182,24 +167,20 @@ paths:
             format: "uuid"
       responses:
         "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/Void"
+          description: Manager with given was successfully deactivated
   /customers:
     get:
-      summary: "GET customers"
+      summary: Get all customers
       operationId: "getAllCustomers"
       responses:
         "200":
-          description: "OK"
+          description: List of all customers
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/CustomersListDto"
     post:
-      summary: "POST customers"
+      summary: Create customer
       operationId: "createCustomer"
       requestBody:
         content:
@@ -209,14 +190,14 @@ paths:
         required: true
       responses:
         "200":
-          description: "OK"
+          description: Customer was successfully created
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/CustomerDto"
   /customers/{id}:
     get:
-      summary: "GET customers/{id}"
+      summary: Get customer with given id
       operationId: "getCustomer"
       parameters:
         - name: "id"
@@ -227,13 +208,13 @@ paths:
             format: "uuid"
       responses:
         "200":
-          description: "OK"
+          description: Customer information
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/CustomerDto"
     patch:
-      summary: "PATCH customers/{id}"
+      summary: Update customer information
       operationId: "updateCustomer"
       parameters:
         - name: "id"
@@ -250,13 +231,13 @@ paths:
         required: true
       responses:
         "200":
-          description: "OK"
+          description: Customer was successfully updated
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/CustomerDto"
     delete:
-      summary: "DELETE customers/{id}"
+      summary: Deactivate customer with given id
       operationId: "deleteCustomer"
       parameters:
         - name: "id"
@@ -267,31 +248,32 @@ paths:
             format: "uuid"
       responses:
         "200":
-          description: "OK"
+          description: Customer with given id was successfully deactivated
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/Void"
   /transactions:
     get:
-      summary: "GET transactions"
+      summary: Get all transactions
       operationId: "getAllTransactions"
       parameters:
         - name: "accountId"
           in: "query"
+          description: Filter transactions by account id
           required: false
           schema:
             type: "string"
             format: "uuid"
       responses:
         "200":
-          description: "OK"
+          description: List of all transactions
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/TransactionListDto"
     post:
-      summary: "POST transactions"
+      summary: Create transaction
       operationId: "createTransaction"
       requestBody:
         content:
@@ -301,14 +283,14 @@ paths:
         required: true
       responses:
         "200":
-          description: "OK"
+          description: Transaction was successfully created
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/TransactionDto"
   /transactions/{id}:
     get:
-      summary: "GET transactions/{id}"
+      summary: Get transaction with given id
       operationId: "getTransaction"
       parameters:
         - name: "id"
@@ -319,7 +301,7 @@ paths:
             format: "uuid"
       responses:
         "200":
-          description: "OK"
+          description: Transaction information
           content:
             '*/*':
               schema:
