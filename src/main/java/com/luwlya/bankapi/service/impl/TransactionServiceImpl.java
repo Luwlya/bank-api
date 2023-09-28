@@ -43,24 +43,8 @@ public class TransactionServiceImpl implements TransactionService {
         if (creditAccount.balance().compareTo(request.amount()) < 0) {
             throw new InsufficientBalanceException(creditAccount.id());
         }
-        Account updatedCreditAccount = new Account(
-                creditAccount.id(),
-                creditAccount.customerId(),
-                creditAccount.name(),
-                creditAccount.balance().subtract(request.amount()),
-                creditAccount.currency(),
-                creditAccount.createdAt(),
-                OffsetDateTime.now(),
-                creditAccount.status());
-        Account updatedDebitAccount = new Account(
-                debitAccount.id(),
-                debitAccount.customerId(),
-                debitAccount.name(),
-                debitAccount.balance().add(request.amount()),
-                debitAccount.currency(),
-                debitAccount.createdAt(),
-                OffsetDateTime.now(),
-                debitAccount.status());
+        Account updatedCreditAccount = creditAccount.withBalance(creditAccount.balance().subtract(request.amount()));
+        Account updatedDebitAccount = debitAccount.withBalance(debitAccount.balance().add(request.amount()));
         Transaction transaction = new Transaction(
                 UUID.randomUUID(),
                 request.debitAccountId(),
