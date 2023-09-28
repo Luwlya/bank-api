@@ -20,7 +20,8 @@ Authorization: Basic root mypass
 
 ###
 
-PATCH http://localhost:8080/customers/cb4bce56-4b27-4f53-95a7-a44dbb269f0c
+PATCH http://localhost:8080/customers/d2451aec-2a56-4cf5-9f96-2607ed1ffd62
+Authorization: Basic root mypass
 Content-Type: application/json
 
 {
@@ -29,10 +30,11 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/customers/cb4bce56-4b27-4f53-95a7-a44dbb269f0c
-
+GET http://localhost:8080/customers/d2451aec-2a56-4cf5-9f96-2607ed1ffd62
+Authorization: Basic root mypass
 ###
-DELETE http://localhost:8080/customers/cb4bce56-4b27-4f53-95a7-a44dbb269f0c
+DELETE http://localhost:8080/customers/d2451aec-2a56-4cf5-9f96-2607ed1ffd62
+Authorization: Basic root mypass
 
 ###
 POST http://localhost:8080/accounts
