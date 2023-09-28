@@ -40,7 +40,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public void insert(Customer customer) {
+    public void insert(Customer customer) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "INSERT INTO customers(id,status, first_name,last_name,email,address,phone,created_at,updated_at) " +
@@ -56,8 +56,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             statement.setObject(8, customer.createdAt());
             statement.setObject(9, customer.updatedAt());
             statement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 

@@ -13,4 +13,5 @@ Optional
 6. code coverage
 7. frontend
 8. race condition during transaction creation
+9. integration test
 

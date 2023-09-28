@@ -4,6 +4,7 @@ import com.luwlya.bankapi.dto.customer.CreateCustomerRequest;
 import com.luwlya.bankapi.dto.customer.CustomerDto;
 import com.luwlya.bankapi.dto.customer.CustomersListDto;
 import com.luwlya.bankapi.dto.customer.UpdateCustomerRequest;
+import com.luwlya.bankapi.exception.CustomerAlreadyExistsException;
 import com.luwlya.bankapi.exception.CustomerNotFoundException;
 import com.luwlya.bankapi.model.Customer;
 import com.luwlya.bankapi.model.CustomerStatus;
@@ -12,6 +13,7 @@ import com.luwlya.bankapi.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -45,7 +47,14 @@ public class CustomerServiceImpl implements CustomerService {
                 request.phone(),
                 OffsetDateTime.now(),
                 OffsetDateTime.now());
-        customerRepository.insert(customer);
+        try {
+            customerRepository.insert(customer);
+        } catch (SQLException e) {
+            if(e.getMessage() != null && e.getMessage().contains("customers_email_key")){
+                throw new CustomerAlreadyExistsException(request.email());
+            }
+            throw new RuntimeException(e);
+        }
         return dto(customer);
     }
 
